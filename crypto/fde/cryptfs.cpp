@@ -1474,7 +1474,7 @@ static int test_mount_hw_encrypted_fs(struct crypt_mnt_ftr* crypt_ftr,
 
   int key_index = 0;
   if(is_hw_disk_encryption((char*)crypt_ftr->crypto_type_name)) {
-    if (crypt_ftr->flags & CRYPT_FORCE_COMPLETE) {
+    if ((crypt_ftr->flags & CRYPT_FORCE_COMPLETE) || (crypt_ftr->flags & CRYPT_MNT_KEY_UNENCRYPTED)) {
        if (decrypt_master_key(passwd, decrypted_master_key, crypt_ftr, 0, 0)) {
            printf("Failed to decrypt master key\n");
            rc = -1;
